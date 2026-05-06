@@ -23,7 +23,7 @@
   --border: #d8ccbc;
   --shadow: rgba(80, 60, 40, 0.10);
 
-  --font-script: 'Great Vibes', cursive;
+  --font-script: 'LamoricRowen', cursive;
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-elegant: 'Cormorant Garamond', Georgia, serif;
   --font-sans: 'Montserrat', system-ui, sans-serif;
@@ -90,9 +90,14 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .nav-brand {
   font-family: var(--font-script);
   font-size: 1.8rem;
-  color: var(--sage-dark);
+  color: rgba(255, 255, 255, 0.92);
   letter-spacing: 0.03em;
   line-height: 1;
+  transition: color var(--transition);
+}
+
+.nav.scrolled .nav-brand {
+  color: var(--sage-dark);
 }
 
 .nav-menu {
@@ -107,7 +112,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-weight: 500;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-md);
+  color: rgba(255, 255, 255, 0.88);
   transition: color var(--transition);
   position: relative;
 }
@@ -119,14 +124,19 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--gold);
+  background: rgba(255, 255, 255, 0.8);
   transition: width var(--transition);
 }
 
 .nav-link:hover,
-.nav-link.active { color: var(--sage-dark); }
+.nav-link.active { color: #ffffff; }
 .nav-link:hover::after,
 .nav-link.active::after { width: 100%; }
+
+.nav.scrolled .nav-link { color: var(--text-md); }
+.nav.scrolled .nav-link::after { background: var(--gold); }
+.nav.scrolled .nav-link:hover,
+.nav.scrolled .nav-link.active { color: var(--sage-dark); }
 
 .nav-toggle {
   display: none;
@@ -139,8 +149,12 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: block;
   width: 24px;
   height: 1.5px;
-  background: var(--text-md);
+  background: rgba(255, 255, 255, 0.88);
   transition: var(--transition);
+}
+
+.nav.scrolled .nav-toggle span {
+  background: var(--text-md);
 }
 
 .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
@@ -152,11 +166,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   height: 100dvh;
   background: var(--cream-2);
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  padding: clamp(68px, 9vh, 96px) 1.5rem clamp(0.75rem, 2vh, 1.75rem);
+  padding: clamp(68px, 9vh, 96px) 1.5rem clamp(3rem, 7vh, 6rem);
 }
 
 /* ── Full-bleed photo ── */
@@ -227,52 +241,38 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .hero-eyebrow {
   font-family: var(--font-sans);
-  font-size: clamp(0.6rem, 1.3vw, 0.75rem);
-  font-weight: 400;
-  letter-spacing: 0.26em;
+  font-size: clamp(0.62rem, 1.4vw, 0.8rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
-  color: var(--text-lt);
+  color: var(--sage-dark);
 }
 
-.hero-names-block {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.25rem;
+.hero-tagline {
+  font-family: var(--font-elegant);
+  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
+  font-style: italic;
+  letter-spacing: 0.12em;
+  color: var(--text-md);
+  margin-top: 0.1rem;
 }
 
-.hero-groom,
-.hero-bride {
+.hero-names-inline {
   font-family: var(--font-script);
-  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  font-size: clamp(2.8rem, 8vw, 6rem);
   font-weight: 400;
   color: var(--sage-dark);
   line-height: 1.05;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 }
 
-.hero-amp-wrap {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: min(520px, 80vw);
-  padding: 0.1rem 0;
-}
-
-.hero-rule-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, transparent, var(--border), transparent);
-  opacity: 0.7;
-}
-
-.hero-amp {
+.hero-names-inline .hero-amp {
   font-family: var(--font-elegant);
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  font-size: clamp(1.4rem, 3.5vw, 2.8rem);
   font-style: italic;
   color: var(--gold);
-  letter-spacing: 0.12em;
-  margin: 0;
+  letter-spacing: 0.08em;
+  vertical-align: middle;
 }
 
 .hero-divider-floral {
@@ -404,6 +404,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   max-width: 700px;
   margin: 0 auto;
   overflow: visible;
+  padding: 1rem 0;
 }
 
 .floral-divider svg { width: 100%; height: auto; }
@@ -764,9 +765,6 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   color: var(--sage);
 }
 
-.event-card-floral { padding: 0; overflow: hidden; }
-.event-card-floral svg { width: 100%; height: auto; display: block; }
-
 .events-photo {
   position: relative;
   overflow: hidden;
@@ -854,6 +852,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
+  padding: 1rem 0;
 }
 
 .footer-floral svg { width: 100%; height: auto; }
