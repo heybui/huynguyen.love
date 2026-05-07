@@ -286,13 +286,20 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: block;
 }
 
-.hero-date {
+.hero-dates {
   font-family: var(--font-elegant);
   font-size: clamp(0.8rem, 2vw, 1.1rem);
   font-weight: 500;
-  letter-spacing: 0.28em;
-  color: var(--text-md);
+  letter-spacing: 0.24em;
+  text-align: center;
+  margin-top: 0.5rem;
+  white-space: nowrap;
 }
+
+.hero-date-bride   { color: var(--rose); }
+.hero-date-wedding { color: var(--sage-dark); }
+.hero-dates-divider { color: var(--text-lt); opacity: 0.6; }
+.hero-date-year-line { color: var(--text-lt); opacity: 0.7; }
 
 .hero-day {
   font-family: var(--font-sans);
@@ -334,6 +341,16 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   color: var(--sage-dark);
   line-height: 1;
 }
+
+.cd-unit-days .cd-num {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.1em;
+}
+
+.cd-days-bride  { color: var(--rose); }
+.cd-days-sep    { font-size: 0.6em; color: var(--text-lt); opacity: 0.7; }
+.cd-days-wedding { color: var(--sage-dark); }
 
 .cd-label {
   font-family: var(--font-sans);
@@ -407,7 +424,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   padding: 1rem 0;
 }
 
-.floral-divider svg { width: 100%; height: auto; }
+.floral-divider svg,
+.floral-divider img { width: 100%; height: auto; }
 
 .invitation-families {
   display: flex;
@@ -653,7 +671,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   max-width: 700px;
   margin: 2.5rem auto 3rem;
 }
-.inv-events-divider svg { width: 100%; height: auto; }
+.inv-events-divider svg,
+.inv-events-divider img { width: 100%; height: auto; }
 
 .events-grid {
   display: grid;
@@ -840,6 +859,260 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .gallery-item:hover img { transform: scale(1.05); }
 
 
+/* ═══════════════════ MỪNG CƯỚI ═══════════════════ */
+.gift {
+  padding: 6rem 0;
+  background: var(--cream);
+}
+
+.gift-intro {
+  text-align: center;
+  font-family: var(--font-elegant);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: var(--text-md);
+  line-height: 1.85;
+  max-width: 640px;
+  margin: 0 auto 3.5rem;
+}
+
+.gift-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(1.5rem, 4vw, 3rem);
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.gift-card {
+  background: var(--white);
+  border-radius: 2px;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 32px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.gift-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(80, 60, 40, 0.14);
+}
+
+.gift-card-header {
+  width: 100%;
+  padding: 1.8rem 1.5rem 1.4rem;
+  background: var(--blush);
+  border-bottom: 1px solid var(--rose-light);
+  min-height: 9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.gift-role {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose);
+  margin-bottom: 0.4rem;
+}
+
+.gift-name {
+  font-family: var(--font-script);
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 400;
+  color: var(--sage-dark);
+  line-height: 1.15;
+}
+
+.gift-qr-wrap {
+  padding: 1.6rem 1.5rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gift-qr {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  display: block;
+}
+
+.gift-qr:not([src]),
+.gift-qr[src=""] {
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 17px,
+      var(--border) 17px,
+      var(--border) 18px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 17px,
+      var(--border) 17px,
+      var(--border) 18px
+    ),
+    var(--cream-2);
+  opacity: 0.45;
+}
+
+.gift-info {
+  width: 100%;
+  padding: 0.6rem 1.6rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.gift-info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.5rem;
+  border-bottom: 1px dashed var(--cream-3);
+  padding-bottom: 0.45rem;
+}
+
+.gift-info-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.gift-info-label {
+  font-family: var(--font-sans);
+  font-size: 0.63rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-lt);
+  white-space: nowrap;
+}
+
+.gift-info-value {
+  font-family: var(--font-elegant);
+  font-size: 0.95rem;
+  color: var(--text);
+  font-weight: 500;
+  text-align: right;
+}
+
+.gift-account {
+  font-family: var(--font-sans);
+  font-size: 0.92rem;
+  letter-spacing: 0.05em;
+  color: var(--sage-dark);
+  font-weight: 600;
+}
+
+.gift-account-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.gift-account-wrap:hover .gift-account {
+  color: var(--sage);
+}
+
+.gift-copy-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--text-lt);
+  line-height: 1;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    transform 0.15s ease;
+}
+
+.gift-copy-btn::after {
+  content: "Đã sao chép!";
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--sage-dark);
+  color: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  padding: 0.28rem 0.55rem;
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.gift-copy-btn::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 3px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--sage-dark);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.gift-copy-btn.copied::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.gift-copy-btn.copied::before {
+  opacity: 1;
+}
+
+.gift-copy-btn:hover {
+  background: var(--cream-2);
+  color: var(--sage-dark);
+  border-color: var(--sage-light);
+}
+
+.gift-copy-btn:active { transform: scale(0.97); }
+
+.gift-copy-btn.copied {
+  background: var(--sage-light);
+  color: var(--sage-dark);
+  border-color: var(--sage);
+}
+
+.gift-copy-btn.copied svg { stroke: var(--sage-dark); }
+
+@media (max-width: 680px) {
+  .gift-cards {
+    grid-template-columns: 1fr;
+    max-width: 420px;
+  }
+}
+
+
 /* ═══════════════════ FOOTER ═══════════════════ */
 .footer {
   background: var(--cream-3);
@@ -855,7 +1128,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   padding: 1rem 0;
 }
 
-.footer-floral svg { width: 100%; height: auto; }
+.footer-floral svg,
+.footer-floral img { width: 100%; height: auto; }
 
 .footer-content {
   padding: 2rem clamp(1.5rem, 4vw, 3rem) 3.5rem;

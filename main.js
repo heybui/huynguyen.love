@@ -3,35 +3,42 @@
 
 /* ── Countdown Timer ── */
 (function initCountdown() {
+  const vuQuy   = new Date('2026-05-30T10:00:00+07:00');
   const wedding = new Date('2026-06-06T15:00:00+07:00');
 
   const els = {
-    days:    document.getElementById('cd-days'),
-    hours:   document.getElementById('cd-hours'),
-    minutes: document.getElementById('cd-minutes'),
-    seconds: document.getElementById('cd-seconds'),
+    daysBride:   document.getElementById('cd-days-bride'),
+    daysWedding: document.getElementById('cd-days-wedding'),
+    hours:       document.getElementById('cd-hours'),
+    minutes:     document.getElementById('cd-minutes'),
+    seconds:     document.getElementById('cd-seconds'),
   };
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
   function tick() {
     const now = Date.now();
-    const diff = wedding.getTime() - now;
+    const diffVuQuy   = vuQuy.getTime() - now;
+    const diffWedding = wedding.getTime() - now;
 
-    if (diff <= 0) {
-      Object.values(els).forEach(el => { if (el) el.textContent = '00'; });
+    const dBride   = diffVuQuy   > 0 ? Math.floor(diffVuQuy   / 86400000) : 0;
+    const dWedding = diffWedding > 0 ? Math.floor(diffWedding / 86400000) : 0;
+
+    if (els.daysBride)   els.daysBride.textContent   = pad(dBride);
+    if (els.daysWedding) els.daysWedding.textContent = pad(dWedding);
+
+    // hours / minutes / seconds count toward the closer event
+    const diffActive = diffVuQuy > 0 ? diffVuQuy : diffWedding;
+    if (diffActive <= 0) {
+      if (els.hours)   els.hours.textContent   = '00';
+      if (els.minutes) els.minutes.textContent = '00';
+      if (els.seconds) els.seconds.textContent = '00';
       return;
     }
 
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
-
-    if (els.days)    els.days.textContent    = pad(d);
-    if (els.hours)   els.hours.textContent   = pad(h);
-    if (els.minutes) els.minutes.textContent = pad(m);
-    if (els.seconds) els.seconds.textContent = pad(s);
+    if (els.hours)   els.hours.textContent   = pad(Math.floor((diffActive % 86400000) / 3600000));
+    if (els.minutes) els.minutes.textContent = pad(Math.floor((diffActive % 3600000)  / 60000));
+    if (els.seconds) els.seconds.textContent = pad(Math.floor((diffActive % 60000)    / 1000));
   }
 
   tick();
@@ -127,4 +134,41 @@
   sections.forEach(s => obs.observe(s));
 })();
 
+(function initGiftCopy() {
+  document.querySelectorAll('.gift-account-wrap').forEach(function (wrap) {
+    var btn = wrap.querySelector('.gift-copy-btn');
+    if (!btn) return;
 
+    wrap.style.cursor = 'pointer';
+
+    wrap.addEventListener('click', function () {
+      var text = btn.dataset.copy;
+      if (!text) return;
+
+      function markCopied() {
+        btn.classList.add('copied');
+        setTimeout(function () {
+          btn.classList.remove('copied');
+        }, 2200);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(markCopied).catch(function () {
+          fallbackCopy(text, markCopied);
+        });
+      } else {
+        fallbackCopy(text, markCopied);
+      }
+    });
+  });
+
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.cssText = 'position:fixed;top:-9999px;left:-9999px;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); cb(); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+})();
