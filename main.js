@@ -344,6 +344,87 @@ function applyLanguage(lang) {
   sections.forEach(s => obs.observe(s));
 })();
 
+/* ── Photo manifest (all 47 wedding photos in images/photos/) ── */
+const PHOTO_MANIFEST = [
+  { file: 'DSC03144.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC03147.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC03150.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC03174.webp', orient: 'landscape', ratio: 1.776 },
+  { file: 'DSC03181.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC03445.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC03449.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC03475.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC03488.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC03607.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC03875.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC03892.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC04084.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC04691.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC04789.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC04869.webp', orient: 'landscape', ratio: 1.499 },
+  { file: 'DSC05450.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05535.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05619.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05679.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05681.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05688.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05694.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05697.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05711.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05744.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05746.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05750.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05791.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05831.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05833.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05926.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05935.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05939.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC05951.webp', orient: 'portrait',  ratio: 0.563 },
+  { file: 'DSC05961.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06003.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06021.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06026.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06104.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06109.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06112.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06113.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06118.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06122.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06129.webp', orient: 'portrait',  ratio: 0.667 },
+  { file: 'DSC06156.webp', orient: 'portrait',  ratio: 0.667 },
+];
+
+/* ── Populate gallery grid from manifest (orientation-aware variant). ── */
+(function populateGallery() {
+  const grid = document.getElementById('galleryGrid');
+  if (!grid) return;
+  PHOTO_MANIFEST.forEach((p, i) => {
+    let variant = '';
+    if (p.orient === 'portrait')      variant = ' gallery-item--tall';
+    else if (p.ratio > 1.7)           variant = ' gallery-item--wide';
+    const item = document.createElement('div');
+    item.className = 'gallery-item' + variant;
+    item.innerHTML =
+      `<img src="images/photos/${p.file}" alt="Wedding photo ${i + 1}" loading="lazy" />` +
+      `<div class="gallery-overlay"></div>`;
+    grid.appendChild(item);
+  });
+})();
+
+/* ── Hero cross-fade slideshow ── */
+(function initHeroSlideshow() {
+  const slides = document.querySelectorAll('.hero-bg .hero-slide');
+  if (slides.length < 2) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  let idx = 0;
+  setInterval(() => {
+    slides[idx].classList.remove('is-active');
+    idx = (idx + 1) % slides.length;
+    slides[idx].classList.add('is-active');
+  }, 5000);
+})();
+
 /* ── Gallery Lightbox ── */
 (function initLightbox() {
   const lightbox = document.getElementById('lightbox');
@@ -363,9 +444,7 @@ function applyLanguage(lang) {
   let switchTimer = null;
 
   function hiResSrc(src) {
-    return src.replace(/\/(\d+)\/(\d+)(?:\?.*)?$/, (_, w, h) =>
-      `/${Math.min(Number(w) * 2, 2000)}/${Math.min(Number(h) * 2, 2000)}`
-    );
+    return src;
   }
 
   function preload(src) {

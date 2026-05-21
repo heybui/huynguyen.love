@@ -93,9 +93,13 @@
     <!-- ═══════════════════ HERO ═══════════════════ -->
     <section id="hero" class="hero">
 
-      <!-- Full-bleed background photo -->
+      <!-- Full-bleed background photo (5-image cross-fade slideshow) -->
       <div class="hero-bg" aria-hidden="true">
-        <img src="https://picsum.photos/seed/n-romantic/1920/1080" alt="" loading="eager" />
+        <img src="images/photos/DSC03174.webp" alt="" loading="eager" class="hero-slide is-active" />
+        <img src="images/photos/DSC03144.webp" alt="" loading="eager" class="hero-slide" />
+        <img src="images/photos/DSC03147.webp" alt="" loading="eager" class="hero-slide" />
+        <img src="images/photos/DSC03150.webp" alt="" loading="eager" class="hero-slide" />
+        <img src="images/photos/DSC03445.webp" alt="" loading="eager" class="hero-slide" />
       </div>
 
       <div class="hero-content">
@@ -351,7 +355,7 @@
         </div>
 
         <div class="events-photo reveal">
-          <img src="https://picsum.photos/seed/venue-amor/1200/500" alt="Không gian tiệc cưới" loading="lazy" data-i18n-attr="alt:event.photoAlt" />
+          <img src="images/photos/DSC03449.webp" alt="Không gian tiệc cưới" loading="lazy" data-i18n-attr="alt:event.photoAlt" />
           <div class="events-photo-caption">
             <p data-i18n="event.photoCaption">AMOR RESORT · Sảnh BELLA VITA · TP. Hồ Chí Minh</p>
           </div>
@@ -375,7 +379,7 @@
         <div class="story-grid">
           <div class="story-photo reveal-left">
             <div class="photo-frame">
-              <img src="https://picsum.photos/seed/couple-huy/540/720" alt="Ảnh đôi Huy và Nguyên" loading="lazy" />
+              <img src="images/photos/DSC03181.webp" alt="Ảnh đôi Huy và Nguyên" loading="lazy" />
             </div>
             <!-- Small floral accent -->
             <div class="photo-floral" aria-hidden="true">
@@ -483,32 +487,7 @@
             </svg><span></span>
           </div>
         </div>
-        <div class="gallery-grid">
-          <div class="gallery-item gallery-item--tall">
-            <img src="https://picsum.photos/seed/wed-g1/600/900" alt="Wedding photo 1" loading="lazy" />
-            <div class="gallery-overlay"></div>
-          </div>
-          <div class="gallery-item">
-            <img src="https://picsum.photos/seed/wed-g2/600/600" alt="Wedding photo 2" loading="lazy" />
-            <div class="gallery-overlay"></div>
-          </div>
-          <div class="gallery-item">
-            <img src="https://picsum.photos/seed/wed-g3/600/600" alt="Wedding photo 3" loading="lazy" />
-            <div class="gallery-overlay"></div>
-          </div>
-          <div class="gallery-item gallery-item--wide">
-            <img src="https://picsum.photos/seed/wed-g4/900/600" alt="Wedding photo 4" loading="lazy" />
-            <div class="gallery-overlay"></div>
-          </div>
-          <div class="gallery-item gallery-item--tall">
-            <img src="https://picsum.photos/seed/wed-g5/600/900" alt="Wedding photo 5" loading="lazy" />
-            <div class="gallery-overlay"></div>
-          </div>
-          <div class="gallery-item">
-            <img src="https://picsum.photos/seed/wed-g6/600/600" alt="Wedding photo 6" loading="lazy" />
-            <div class="gallery-overlay"></div>
-          </div>
-        </div>
+        <div class="gallery-grid" id="galleryGrid"></div>
       </div>
     </section>
 
