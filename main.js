@@ -48,6 +48,8 @@ const I18N_DICT = {
 
     'gallery.eye': 'Khoảnh Khắc Yêu Thương',
     'gallery.title': 'Trân Trọng Kỷ Niệm',
+    'gallery.more': 'Xem Thêm Ảnh',
+    'gallery.less': 'Thu Gọn',
 
     'gift.eye': 'Chung Vui Cùng Chúng Tôi',
     'gift.title': 'Mừng Cưới',
@@ -115,6 +117,8 @@ const I18N_DICT = {
 
     'gallery.eye': 'Cherished Moments',
     'gallery.title': 'Treasured Memories',
+    'gallery.more': 'Show More Photos',
+    'gallery.less': 'Show Less',
 
     'gift.eye': 'Celebrate With Us',
     'gift.title': 'Wedding Gifts',
@@ -415,6 +419,22 @@ const PHOTO_MANIFEST = [
       `width="${w}" height="${h}" loading="lazy" />` +
       `<div class="gallery-overlay"></div>`;
     grid.appendChild(item);
+  });
+})();
+
+/* ── "Show more" toggle for the collapsed gallery preview ── */
+(function initGalleryToggle() {
+  const wrap = document.getElementById('galleryCollapse');
+  const btn  = document.getElementById('galleryMoreBtn');
+  if (!wrap || !btn) return;
+  btn.addEventListener('click', () => {
+    const nowCollapsed = wrap.classList.toggle('is-collapsed');
+    btn.setAttribute('aria-expanded', String(!nowCollapsed));
+    // When collapsing back, scroll the gallery section back into view so
+    // the user doesn't end up stranded mid-page below where the gallery used to end.
+    if (nowCollapsed) {
+      document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 })();
 
