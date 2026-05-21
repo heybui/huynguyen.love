@@ -71,17 +71,24 @@
       <div class="nav-inner">
         <a href="#hero" class="nav-brand">H &amp; N</a>
         <ul class="nav-menu" id="navMenu">
-          <li><a href="#hero" class="nav-link">Home</a></li>
-          <li><a href="#invitation" class="nav-link">Invitation</a></li>
-          <li><a href="#story" class="nav-link">Story</a></li>
-          <li><a href="#gallery" class="nav-link">Album</a></li>
-          <li><a href="#gift" class="nav-link">Gifts</a></li>
+          <li><a href="#hero" class="nav-link" data-i18n="nav.home">Home</a></li>
+          <li><a href="#invitation" class="nav-link" data-i18n="nav.invitation">Invitation</a></li>
+          <li><a href="#story" class="nav-link" data-i18n="nav.story">Story</a></li>
+          <li><a href="#gallery" class="nav-link" data-i18n="nav.gallery">Album</a></li>
+          <li><a href="#gift" class="nav-link" data-i18n="nav.gift">Gifts</a></li>
         </ul>
         <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
           <span></span><span></span><span></span>
         </button>
       </div>
     </nav>
+
+    <!-- ═══════════════════ LANGUAGE SWITCH ═══════════════════ -->
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button class="lang-btn" data-lang="vi" aria-pressed="false">VN</button>
+      <span class="lang-sep" aria-hidden="true">|</span>
+      <button class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
+    </div>
 
     <!-- ═══════════════════ HERO ═══════════════════ -->
     <section id="hero" class="hero">
@@ -93,7 +100,7 @@
 
       <div class="hero-content">
         <div class="hero-title">
-          <p class="hero-eyebrow">Save The Date</p>
+          <p class="hero-eyebrow" data-i18n="hero.eyebrow">Save The Date</p>
           <h1 class="hero-names-inline">Huy<span class="hero-amp">&amp;</span> Nguyên</h1>
           <p class="hero-dates">
             <span class="hero-date-bride">30 · 05</span><span class="hero-dates-divider"> & </span><span class="hero-date-wedding">06 · 06</span><span class="hero-dates-divider"> · </span><span class="hero-date-year-line">2026</span>
@@ -107,27 +114,27 @@
               <span class="cd-num">
                 <span id="cd-days-bride" class="cd-days-bride">--</span><span class="cd-days-sep">/</span><span id="cd-days-wedding" class="cd-days-wedding">--</span>
               </span>
-              <span class="cd-label">Ngày</span>
+              <span class="cd-label" data-i18n="cd.days">Ngày</span>
             </div>
             <span class="cd-sep">:</span>
             <div class="cd-unit">
               <span class="cd-num" id="cd-hours">--</span>
-              <span class="cd-label">Giờ</span>
+              <span class="cd-label" data-i18n="cd.hours">Giờ</span>
             </div>
             <span class="cd-sep">:</span>
             <div class="cd-unit">
               <span class="cd-num" id="cd-minutes">--</span>
-              <span class="cd-label">Phút</span>
+              <span class="cd-label" data-i18n="cd.minutes">Phút</span>
             </div>
             <span class="cd-sep">:</span>
             <div class="cd-unit">
               <span class="cd-num" id="cd-seconds">--</span>
-              <span class="cd-label">Giây</span>
+              <span class="cd-label" data-i18n="cd.seconds">Giây</span>
             </div>
           </div>
         </div>
 
-        <a href="#invitation" class="scroll-arrow" aria-label="Cuộn xuống">
+        <a href="#invitation" class="scroll-arrow" aria-label="Cuộn xuống" data-i18n-attr="aria-label:hero.scrollAria">
           <svg width="30" height="46" viewBox="0 0 30 46" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="1" y="1" width="28" height="44" rx="14" stroke="#7a6a5a" stroke-width="1.5" opacity="0.55" />
             <circle class="scroll-dot" cx="15" cy="12" r="3.5" fill="#7a6a5a" opacity="0.6" />
@@ -147,7 +154,7 @@
       <div class="container">
         <div class="invitation-families">
           <div class="family-col">
-            <p class="family-role">Nhà Trai</p>
+            <p class="family-role" data-i18n="inv.familyMan">Nhà Trai</p>
             <p class="family-name"><strong>Bùi Đức Quang</strong></p>
             <p class="family-amp">&amp;</p>
             <p class="family-name"><strong>Âu Thị Nguyệt Quế</strong></p>
@@ -163,19 +170,19 @@
             </svg>
           </div>
           <div class="family-col">
-            <p class="family-role">Nhà Gái</p>
+            <p class="family-role" data-i18n="inv.familyWoman">Nhà Gái</p>
             <p class="family-name"><strong>Lê Thị Thu Hiền</strong></p>
             <p class="family-location">Tánh Linh, Lâm Đồng</p>
           </div>
         </div>
 
         <div class="invitation-message">
-          <p class="inv-announce">Trân trọng báo tin</p>
+          <p class="inv-announce" data-i18n="inv.announce">Trân trọng báo tin</p>
         </div>
 
         <div class="invitation-couple">
           <h2 class="inv-groom">Bùi Đức Huy</h2>
-          <span class="inv-roles">Trưởng Nam &nbsp;·&nbsp; Thứ Nữ</span>
+          <span class="inv-roles" data-i18n="inv.roles">Trưởng Nam &nbsp;·&nbsp; Thứ Nữ</span>
           <h2 class="inv-bride">Nguyễn Thị Đài Nguyên</h2>
         </div>
       </div>
@@ -232,7 +239,7 @@
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-                <span>Thứ Bảy, 30 tháng 05 năm 2026</span>
+                <span data-i18n="event.vuquy.date">Thứ Bảy, 30 tháng 05 năm 2026</span>
               </div>
               <div class="event-detail-row">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a9a7a" stroke-width="1.5"
@@ -240,7 +247,7 @@
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
-                <span>Đón khách 10:00 &nbsp;·&nbsp; Khai tiệc 11:00</span>
+                <span data-i18n="event.vuquy.time">Đón khách 10:00 &nbsp;·&nbsp; Khai tiệc 11:00</span>
               </div>
               <div class="event-location">
                 <div class="event-detail-row">
@@ -262,7 +269,7 @@
                 </iframe>
                 <a class="event-map-link"
                   href="https://www.google.com/maps/place/Coffee+Gi%C3%B3/@11.0807083,107.6939075,1072m/data=!3m1!1e3!4m10!1m2!2m1!1zQ2FmZSBHacOzIFTDoW5oIExpbmg!3m6!1s0x31743ff9e8c6a911:0x48e36ecf4c0057e0!8m2!3d11.0806607!4d107.6961479"
-                  target="_blank" rel="noopener">
+                  target="_blank" rel="noopener" data-i18n="event.mapLink">
                   Xem trên Google Maps ↗
                 </a>
               </div>
@@ -303,7 +310,7 @@
                   <line x1="8" y1="2" x2="8" y2="6" />
                   <line x1="3" y1="10" x2="21" y2="10" />
                 </svg>
-                <span>Thứ Bảy, 06 tháng 06 năm 2026</span>
+                <span data-i18n="event.thanhhon.date">Thứ Bảy, 06 tháng 06 năm 2026</span>
               </div>
               <div class="event-detail-row">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a9a7a" stroke-width="1.5"
@@ -311,7 +318,7 @@
                   <circle cx="12" cy="12" r="10" />
                   <polyline points="12 6 12 12 16 14" />
                 </svg>
-                <span>Đón khách 18:00 &nbsp;·&nbsp; Khai tiệc 19:00</span>
+                <span data-i18n="event.thanhhon.time">Đón khách 18:00 &nbsp;·&nbsp; Khai tiệc 19:00</span>
               </div>
               <div class="event-location">
                 <div class="event-detail-row">
@@ -335,7 +342,7 @@
                 </iframe>
                 <a class="event-map-link"
                   href="https://maps.google.com/maps?q=AMOR+Resort+61A+Nguyen+Van+Dau+Binh+Thanh+Ho+Chi+Minh"
-                  target="_blank" rel="noopener">
+                  target="_blank" rel="noopener" data-i18n="event.mapLink">
                   Xem trên Google Maps ↗
                 </a>
               </div>
@@ -344,9 +351,9 @@
         </div>
 
         <div class="events-photo reveal">
-          <img src="https://picsum.photos/seed/venue-amor/1200/500" alt="Không gian tiệc cưới" loading="lazy" />
+          <img src="https://picsum.photos/seed/venue-amor/1200/500" alt="Không gian tiệc cưới" loading="lazy" data-i18n-attr="alt:event.photoAlt" />
           <div class="events-photo-caption">
-            <p>AMOR RESORT · Sảnh BELLA VITA · TP. Hồ Chí Minh</p>
+            <p data-i18n="event.photoCaption">AMOR RESORT · Sảnh BELLA VITA · TP. Hồ Chí Minh</p>
           </div>
         </div>
       </div>
@@ -356,8 +363,8 @@
     <section id="story" class="story reveal">
       <div class="container">
         <div class="section-header">
-          <p class="section-eye">Câu Chuyện Của Chúng Tôi</p>
-          <h2 class="section-title">Hành Trình Tình Yêu</h2>
+          <p class="section-eye" data-i18n="story.eye">Câu Chuyện Của Chúng Tôi</p>
+          <h2 class="section-title" data-i18n="story.title">Hành Trình Tình Yêu</h2>
           <div class="section-rule">
             <span></span><svg width="20" height="20" viewBox="0 0 20 20">
               <path d="M10 2 L12 8 L18 8 L13 12 L15 18 L10 14 L5 18 L7 12 L2 8 L8 8 Z" fill="#c8a870" opacity="0.7" />
@@ -429,33 +436,33 @@
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-body">
-                <h3>Lần Đầu Gặp Gỡ</h3>
+                <h3 data-i18n="story.item1.title">Lần Đầu Gặp Gỡ</h3>
                 <p class="timeline-year">12/2024</p>
-                <p>Hai người đã biết nhau qua mạng xã hội từ trước — những tin nhắn qua lại, những cuộc trò chuyện khuya. Rồi một ngày, cả hai hẹn gặp tại một quán cafe nhỏ ở Gò Vấp. Từ màn hình điện thoại ra ngoài đời thực, mọi thứ đều tự nhiên hơn, ấm áp hơn — và đẹp hơn rất nhiều.</p>
+                <p data-i18n="story.item1.body">Hai người đã biết nhau qua mạng xã hội từ trước — những tin nhắn qua lại, những cuộc trò chuyện khuya. Rồi một ngày, cả hai hẹn gặp tại một quán cafe nhỏ ở Gò Vấp. Từ màn hình điện thoại ra ngoài đời thực, mọi thứ đều tự nhiên hơn, ấm áp hơn — và đẹp hơn rất nhiều.</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-body">
-                <h3>Trở Thành Đôi</h3>
+                <h3 data-i18n="story.item2.title">Trở Thành Đôi</h3>
                 <p class="timeline-year">02/2025</p>
-                <p>Trong không gian dịu nhẹ của một nhà hàng lãng mạn, Huy đã thổ lộ những điều lâu nay chỉ dám giữ trong lòng. Không cần lời hoa mỹ, chỉ là sự chân thành — và Nguyên đã nhận lời, bắt đầu hành trình hai người bên nhau từ đó.</p>
+                <p data-i18n="story.item2.body">Trong không gian dịu nhẹ của một nhà hàng lãng mạn, Huy đã thổ lộ những điều lâu nay chỉ dám giữ trong lòng. Không cần lời hoa mỹ, chỉ là sự chân thành — và Nguyên đã nhận lời, bắt đầu hành trình hai người bên nhau từ đó.</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot"></div>
               <div class="timeline-body">
-                <h3>Cầu Hôn</h3>
+                <h3 data-i18n="story.item3.title">Cầu Hôn</h3>
                 <p class="timeline-year">2025</p>
-                <p>Không tiệc tùng, không cầu kỳ — Huy đã lặng lẽ chuẩn bị một chiếc nhẫn ngay trong căn nhà của mình. Đơn giản thôi, nhưng Nguyên đã bật khóc và gật đầu. Bởi với cô, điều quan trọng nhất không phải là sự hoàn hảo — mà là người đứng trước mặt mình.</p>
+                <p data-i18n="story.item3.body">Không tiệc tùng, không cầu kỳ — Huy đã lặng lẽ chuẩn bị một chiếc nhẫn ngay trong căn nhà của mình. Đơn giản thôi, nhưng Nguyên đã bật khóc và gật đầu. Bởi với cô, điều quan trọng nhất không phải là sự hoàn hảo — mà là người đứng trước mặt mình.</p>
               </div>
             </div>
             <div class="timeline-item">
               <div class="timeline-dot timeline-dot--gold"></div>
               <div class="timeline-body">
-                <h3>Ngày Trọng Đại</h3>
+                <h3 data-i18n="story.item4.title">Ngày Trọng Đại</h3>
                 <p class="timeline-year">30 · 05 · 2026 &amp; 06 · 06 · 2026</p>
-                <p>Hai ngày, hai lễ, một tình yêu. Chúng tôi trân trọng từng khoảnh khắc được có nhau — và hạnh phúc hơn khi có quý khách cùng chứng kiến chương đẹp nhất của cuộc đời này.</p>
+                <p data-i18n="story.item4.body">Hai ngày, hai lễ, một tình yêu. Chúng tôi trân trọng từng khoảnh khắc được có nhau — và hạnh phúc hơn khi có quý khách cùng chứng kiến chương đẹp nhất của cuộc đời này.</p>
               </div>
             </div>
           </div>
@@ -468,8 +475,8 @@
     <section id="gallery" class="gallery reveal">
       <div class="container">
         <div class="section-header">
-          <p class="section-eye">Khoảnh Khắc Yêu Thương</p>
-          <h2 class="section-title">Trân Trọng Kỷ Niệm</h2>
+          <p class="section-eye" data-i18n="gallery.eye">Khoảnh Khắc Yêu Thương</p>
+          <h2 class="section-title" data-i18n="gallery.title">Trân Trọng Kỷ Niệm</h2>
           <div class="section-rule">
             <span></span><svg width="20" height="20" viewBox="0 0 20 20">
               <path d="M10 2 L12 8 L18 8 L13 12 L15 18 L10 14 L5 18 L7 12 L2 8 L8 8 Z" fill="#c8a870" opacity="0.7" />
@@ -510,8 +517,8 @@
       <div class="container">
 
         <div class="section-header">
-          <p class="section-eye">Chung Vui Cùng Chúng Tôi</p>
-          <h2 class="section-title">Mừng Cưới</h2>
+          <p class="section-eye" data-i18n="gift.eye">Chung Vui Cùng Chúng Tôi</p>
+          <h2 class="section-title" data-i18n="gift.title">Mừng Cưới</h2>
           <div class="section-rule">
             <span></span>
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -522,7 +529,7 @@
           </div>
         </div>
 
-        <p class="gift-intro">
+        <p class="gift-intro" data-i18n-html="gift.intro">
           Được chào đón bạn trong ngày trọng đại này là niềm hạnh phúc lớn lao nhất của bọn mình.<br>
           Nếu bạn muốn gửi chút lòng mừng cưới, dưới đây là thông tin chuyển khoản của hai đứa.
         </p>
@@ -532,7 +539,7 @@
           <!-- Groom card -->
           <div class="gift-card reveal-left">
             <div class="gift-card-header">
-              <span class="gift-role">Chú Rể</span>
+              <span class="gift-role" data-i18n="gift.role.groom">Chú Rể</span>
               <h3 class="gift-name">Bùi Đức Huy</h3>
             </div>
             <div class="gift-qr-wrap">
@@ -540,14 +547,14 @@
             </div>
             <div class="gift-info">
               <div class="gift-info-row">
-                <span class="gift-info-label">Ngân hàng</span>
+                <span class="gift-info-label" data-i18n="gift.bank">Ngân hàng</span>
                 <span class="gift-info-value">Tiên Phong - TPBank</span>
               </div>
               <div class="gift-info-row">
-                <span class="gift-info-label">Số tài khoản</span>
+                <span class="gift-info-label" data-i18n="gift.account">Số tài khoản</span>
                 <span class="gift-account-wrap">
                   <span class="gift-info-value gift-account">00132933001</span>
-                  <button class="gift-copy-btn" data-copy="00132933001" aria-label="Sao chép số tài khoản chú rể">
+                  <button class="gift-copy-btn" data-copy="00132933001" aria-label="Sao chép số tài khoản chú rể" data-i18n-attr="aria-label:gift.copy.groom">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -562,7 +569,7 @@
           <!-- Bride card -->
           <div class="gift-card reveal-right">
             <div class="gift-card-header">
-              <span class="gift-role">Cô Dâu</span>
+              <span class="gift-role" data-i18n="gift.role.bride">Cô Dâu</span>
               <h3 class="gift-name">Nguyễn Thị Đài Nguyên</h3>
             </div>
             <div class="gift-qr-wrap">
@@ -570,14 +577,14 @@
             </div>
             <div class="gift-info">
               <div class="gift-info-row">
-                <span class="gift-info-label">Ngân hàng</span>
+                <span class="gift-info-label" data-i18n="gift.bank">Ngân hàng</span>
                 <span class="gift-info-value">Á Châu - ACB</span>
               </div>
               <div class="gift-info-row">
-                <span class="gift-info-label">Số tài khoản</span>
+                <span class="gift-info-label" data-i18n="gift.account">Số tài khoản</span>
                 <span class="gift-account-wrap">
                   <span class="gift-info-value gift-account">0987654321</span>
-                  <button class="gift-copy-btn" data-copy="0987654321" aria-label="Sao chép số tài khoản cô dâu">
+                  <button class="gift-copy-btn" data-copy="0987654321" aria-label="Sao chép số tài khoản cô dâu" data-i18n-attr="aria-label:gift.copy.bride">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                          stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                       <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
@@ -599,8 +606,8 @@
       </div>
 
       <div class="footer-content">
-        <p class="footer-thank">Sự hiện diện của quý khách</p>
-        <p class="footer-thank-sub">là niềm vinh hạnh cho gia đình chúng tôi</p>
+        <p class="footer-thank" data-i18n="footer.thank">Sự hiện diện của quý khách</p>
+        <p class="footer-thank-sub" data-i18n="footer.thankSub">là niềm vinh hạnh cho gia đình chúng tôi</p>
         <div class="footer-names">
           <span class="footer-name">Bùi Đức Huy</span>
           <span class="footer-heart">♡</span>
@@ -609,6 +616,30 @@
         <p class="footer-date">30 · 05 · 2026 & 06 · 06 · 2026</p>
       </div>
     </footer>
+
+    <!-- ═══════════════════ LIGHTBOX ═══════════════════ -->
+    <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image preview">
+      <button class="lightbox-close" id="lbClose" type="button" aria-label="Đóng" data-i18n-attr="aria-label:lightbox.close">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <line x1="6" y1="6" x2="18" y2="18" />
+          <line x1="18" y1="6" x2="6" y2="18" />
+        </svg>
+      </button>
+      <button class="lightbox-nav lightbox-prev" id="lbPrev" type="button" aria-label="Ảnh trước" data-i18n-attr="aria-label:lightbox.prev">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <div class="lightbox-stage">
+        <img class="lightbox-img" id="lbImg" src="" alt="" />
+        <div class="lightbox-counter" id="lbCounter">1 / 6</div>
+      </div>
+      <button class="lightbox-nav lightbox-next" id="lbNext" type="button" aria-label="Ảnh sau" data-i18n-attr="aria-label:lightbox.next">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
+    </div>
 
     <script src="main.js"></script>
   </body>
