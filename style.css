@@ -73,7 +73,6 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .nav.scrolled {
   background: rgba(250, 248, 243, 0.96);
-  backdrop-filter: blur(8px);
   box-shadow: 0 1px 20px var(--shadow);
   padding: 0.75rem 0;
 }
@@ -163,7 +162,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 /* ═══════════════════ HERO ═══════════════════ */
 .hero {
-  height: 100dvh;
+  min-height: 100svh;
   background: var(--cream-2);
   display: flex;
   align-items: flex-end;
@@ -185,6 +184,11 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   height: 100%;
   object-fit: cover;
   object-position: center;
+  /* Inline LQIP (tiny base64 blur) sits in style="background-image:..." on each .hero-slide.
+     These rules make that background fill the slide while the real photo downloads. */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 /* Hero cross-fade slideshow: stack slides, fade the active one in. */
@@ -201,23 +205,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .hero-bg .hero-slide { transition: none; }
 }
 
-/* Subtle warm tint + soft halo behind the title for legibility (photo stays visible). */
+/* Top + bottom vignette only — keeps nav legible. */
 .hero::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 1;
   background:
-    radial-gradient(ellipse 55% 45% at 50% 62%,
-      rgba(250, 246, 240, 0.55) 0%,
-      rgba(248, 242, 232, 0.32) 35%,
-      rgba(240, 230, 215, 0.12) 65%,
-      rgba(190, 172, 148, 0.00) 100%),
     linear-gradient(to bottom,
-      rgba(20, 14, 6, 0.18) 0%,
-      transparent 22%,
+      rgba(20, 14, 6, 0.22) 0%,
+      transparent 18%,
       transparent 70%,
-      rgba(20, 14, 6, 0.28) 100%);
+      rgba(20, 14, 6, 0.32) 100%);
   pointer-events: none;
 }
 
@@ -232,163 +231,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .corner-deco--tl { top: 0; left: 0; }
 .corner-deco--br { bottom: 0; right: 0; }
 
-.hero-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(0.75rem, 2.2vh, 2.2rem);
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  width: 100%;
-}
-
-/* ── Wreath ── */
-/* ── Hero title (no wreath) ── */
-.hero-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(0.5rem, 1.4vh, 1.1rem);
-}
-
-.hero-eyebrow {
-  font-family: var(--font-sans);
-  font-size: clamp(0.62rem, 1.4vw, 0.8rem);
-  font-weight: 600;
-  letter-spacing: 0.32em;
-  text-transform: uppercase;
-  color: var(--sage-dark);
-}
-
-.hero-tagline {
-  font-family: var(--font-elegant);
-  font-size: clamp(0.75rem, 1.6vw, 0.95rem);
-  font-style: italic;
-  letter-spacing: 0.12em;
-  color: var(--text-md);
-  margin-top: 0.1rem;
-}
-
-.hero-names-inline {
-  font-family: var(--font-script);
-  font-size: clamp(2.8rem, 8vw, 6rem);
-  font-weight: 400;
-  color: var(--sage-dark);
-  line-height: 1.05;
-  letter-spacing: 0.02em;
-}
-
-.hero-names-inline .hero-amp {
-  font-family: var(--font-elegant);
-  font-size: clamp(1.4rem, 3.5vw, 2.8rem);
-  font-style: italic;
-  color: var(--gold);
-  letter-spacing: 0.08em;
-  vertical-align: middle;
-}
-
-.hero-divider-floral {
-  width: min(380px, 88vw);
-  margin: 0.1rem 0;
-}
-
-.hero-divider-floral svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.hero-dates {
-  font-family: var(--font-elegant);
-  font-size: clamp(0.8rem, 2vw, 1.1rem);
-  font-weight: 500;
-  letter-spacing: 0.24em;
-  text-align: center;
-  margin-top: 0.5rem;
-  white-space: nowrap;
-}
-
-.hero-date-bride   { color: var(--rose); }
-.hero-date-wedding { color: var(--sage-dark); }
-.hero-dates-divider { color: var(--text-lt); opacity: 0.6; }
-.hero-date-year-line { color: var(--text-lt); opacity: 0.7; }
-
-.hero-day {
-  font-family: var(--font-sans);
-  font-size: clamp(0.55rem, 1.2vw, 0.68rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--text-lt);
-}
-
-/* ── Countdown ── */
-.countdown-block { text-align: center; }
-
-.countdown-title {
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-lt);
-  margin-bottom: 0.9rem;
-}
-
-.countdown {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.cd-unit {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: clamp(52px, 9vw, 72px);
-}
-
-.cd-num {
-  font-family: var(--font-serif);
-  font-size: clamp(1.6rem, 4vw, 2.4rem);
-  font-weight: 400;
-  color: var(--sage-dark);
-  line-height: 1;
-}
-
-.cd-unit-days .cd-num {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.1em;
-}
-
-.cd-days-bride  { color: var(--rose); }
-.cd-days-sep    { font-size: 0.6em; color: var(--text-lt); opacity: 0.7; }
-.cd-days-wedding { color: var(--sage-dark); }
-
-.cd-label {
-  font-family: var(--font-sans);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-lt);
-  margin-top: 0.3rem;
-}
-
-.cd-sep {
-  font-family: var(--font-serif);
-  font-size: 1.4rem;
-  color: var(--gold);
-  opacity: 0.7;
-  padding-bottom: 1rem;
-}
-
 /* ── Scroll arrow ── */
 .scroll-arrow {
+  position: absolute;
+  left: 50%;
+  bottom: clamp(1.5rem, 4vh, 3rem);
+  transform: translateX(-50%);
   display: flex;
-  flex-direction: column;
   align-items: center;
-  opacity: 0.65;
-  transition: opacity var(--transition), transform var(--transition);
+  justify-content: center;
+  z-index: 4;
+  opacity: 0.85;
+  transition: opacity var(--transition);
   animation: scrollBounce 2.4s ease-in-out infinite;
 }
 
@@ -397,13 +251,17 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .scroll-dot { animation: scrollDot 2.4s ease-in-out infinite; }
 
 @keyframes scrollBounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 6px); }
 }
 
 @keyframes scrollDot {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(10px); opacity: 0.3; }
+  0%, 100% { transform: translateY(0);    opacity: 0.85; }
+  50%      { transform: translateY(10px); opacity: 0.4; }
+}
+
+@media (max-height: 600px) {
+  .scroll-arrow { display: none; }
 }
 
 /* ═══════════════════ INVITATION ═══════════════════ */
@@ -572,11 +430,12 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: clamp(2rem, 5vw, 5rem);
-  align-items: start;
+  align-items: stretch;
 }
 
 .story-photo {
   position: relative;
+  display: flex;
 }
 
 .photo-frame {
@@ -584,6 +443,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   overflow: hidden;
   border-radius: 2px;
   box-shadow: 0 12px 40px var(--shadow), 0 4px 12px rgba(0,0,0,0.06);
+  flex: 1;
+  min-height: 0;
 }
 
 .photo-frame::before {
@@ -597,7 +458,8 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .photo-frame img {
   width: 100%;
-  aspect-ratio: 3/4;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.8s ease;
 }
 
@@ -814,22 +676,6 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 .events-photo:hover img { transform: scale(1.03); }
 
-.events-photo-caption {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 1.2rem 2rem;
-  background: linear-gradient(transparent, rgba(30,24,18,0.6));
-  color: rgba(255,255,255,0.9);
-  font-family: var(--font-sans);
-  font-size: 0.68rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-
 /* ═══════════════════ GALLERY ═══════════════════ */
 .gallery {
   padding: 6rem 0;
@@ -849,13 +695,39 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   break-inside: avoid;
   margin: 0 0 12px;
   cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='22' height='22' viewBox='0 0 22 22'><path d='M11,18.5 C5.5,15 2.2,11.5 2.2,7.4 C2.2,5 4.1,3.1 6.5,3.1 C8.4,3.1 10.1,4.1 11,5.6 C11.9,4.1 13.6,3.1 15.5,3.1 C17.9,3.1 19.8,5 19.8,7.4 C19.8,11.5 16.5,15 11,18.5 Z' fill='%23d4898a' stroke='%23ffffff' stroke-width='1.4' stroke-linejoin='round'/></svg>") 11 11, pointer;
+  /* Skeleton shimmer shown while the <img> downloads — img.width/height attrs already
+     reserve the right aspect-ratio box, so the shimmer fills it exactly. */
+  background: linear-gradient(110deg, #efe5d5 25%, #f7eddc 50%, #efe5d5 75%);
+  background-size: 220% 100%;
+  animation: gallery-shimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes gallery-shimmer {
+  0%   { background-position: 220% 0; }
+  100% { background-position: -120% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-item { animation: none; }
 }
 
 .gallery-item img {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.7s ease, filter 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.5s ease, transform 0.7s ease, filter 0.4s ease;
+}
+
+.gallery-item img.is-loaded {
+  opacity: 1;
+}
+
+/* Stop the shimmer once the photo is in (the img already covers it; this just
+   stops the GPU cycle). Falls back gracefully on browsers without :has. */
+.gallery-item:has(img.is-loaded) {
+  animation: none;
+  background: transparent;
 }
 
 .gallery-overlay {
@@ -1280,6 +1152,9 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
     margin: 0 auto;
   }
 
+  /* In single-column layout there's no sibling to size against — restore a fixed aspect ratio. */
+  .photo-frame { aspect-ratio: 3/4; }
+
   .photo-floral { display: none; }
 
   .events-grid { grid-template-columns: 1fr; }
@@ -1310,13 +1185,19 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
   .nav-menu.open { transform: translateX(0); }
 
+  /* Menu panel is white — force dark link colors regardless of nav scrolled state */
+  .nav-menu.open .nav-link { color: var(--text-md); }
+  .nav-menu.open .nav-link::after { background: var(--gold); }
+  .nav-menu.open .nav-link:hover,
+  .nav-menu.open .nav-link.active { color: var(--sage-dark); }
+
   .nav-link { font-size: 0.82rem; }
 
   .nav-toggle { display: flex; z-index: 1001; }
 
-  .hero-groom, .hero-bride { font-size: clamp(1.8rem, 9vw, 3.2rem); }
-  .hero-amp-wrap { width: 90vw; }
-  .hero-divider-floral { width: 90vw; }
+  /* When the menu is open, the close-X sits on the white panel — needs dark strokes */
+  .nav-toggle.active span { background: var(--text-md); }
+
   .inv-bot { display: none; }
 
   .invitation-families {
@@ -1334,50 +1215,43 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   }
   .gallery-item { margin-bottom: 8px; }
 
-  .countdown { gap: 0.3rem; }
-  .cd-unit { min-width: 48px; }
-  .cd-sep { font-size: 1.1rem; }
-
   .events-photo img { height: 260px; }
 
   .footer-names { flex-wrap: wrap; gap: 0.5rem; }
 }
 
-@media (max-width: 400px) {
-  .hero-groom, .hero-bride { font-size: clamp(1rem, 6vw, 1.4rem); }
-}
-
-/* Short screens (landscape phones, small laptops) */
-@media (max-height: 600px) {
-  .countdown-block { display: none; }
-  .scroll-arrow    { display: none; }
-}
-
-
 /* ═══════════════════ LANGUAGE SWITCH ═══════════════════ */
+/* Default (over hero photo): transparent, light text. Mirrors .nav. */
 .lang-switch {
   position: fixed;
-  bottom: 1.25rem;
-  right: 1.25rem;
+  bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  right: calc(1.25rem + env(safe-area-inset-right, 0px));
   z-index: 1100;
   display: inline-flex;
   align-items: center;
   gap: 0.15rem;
-  padding: 0.3rem 0.55rem;
-  background: rgba(250, 248, 243, 0.92);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border);
+  padding: 0.3rem;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 999px;
-  box-shadow: 0 2px 14px var(--shadow);
+  box-shadow: none;
   font-family: var(--font-sans);
   font-size: 0.72rem;
   letter-spacing: 0.1em;
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+.lang-switch.scrolled {
+  background: rgba(250, 248, 243, 0.92);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-color: var(--border);
+  box-shadow: 0 2px 14px var(--shadow);
 }
 
 .lang-btn {
   padding: 0.25rem 0.55rem;
-  color: var(--text-lt);
+  color: rgba(255, 255, 255, 0.85);
   background: transparent;
   border-radius: 999px;
   font-weight: 500;
@@ -1385,7 +1259,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 }
 
 .lang-btn:hover {
-  color: var(--text);
+  color: #ffffff;
 }
 
 .lang-btn.active {
@@ -1393,11 +1267,18 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   background: var(--gold);
 }
 
+.lang-switch.scrolled .lang-btn { color: var(--text-lt); }
+.lang-switch.scrolled .lang-btn:hover { color: var(--text); }
+.lang-switch.scrolled .lang-btn.active { color: #fff; background: var(--gold); }
+
 .lang-sep {
-  color: var(--border);
+  color: rgba(255, 255, 255, 0.4);
   font-size: 0.7rem;
   user-select: none;
+  transition: color var(--transition);
 }
+
+.lang-switch.scrolled .lang-sep { color: var(--border); }
 
 /* ═══════════════════ LIGHTBOX ═══════════════════ */
 .lightbox {
@@ -1551,6 +1432,12 @@ body.lightbox-open .nav {
     font-size: 0.72rem;
   }
 
+  /* Lift the language switcher away from the home-indicator on phones */
+  .lang-switch {
+    bottom: calc(2.25rem + env(safe-area-inset-bottom, 0px));
+    right: calc(1rem + env(safe-area-inset-right, 0px));
+  }
+
   .lightbox-img {
     max-height: calc(100vh - 8rem);
   }
@@ -1558,6 +1445,6 @@ body.lightbox-open .nav {
 
 /* ═══════════════════ PRINT ═══════════════════ */
 @media print {
-  .nav, .scroll-arrow, .countdown-block, .lang-switch, .lightbox { display: none; }
+  .nav, .lang-switch, .lightbox { display: none; }
   .hero { min-height: auto; padding: 2rem 1rem; }
 }

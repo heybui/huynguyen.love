@@ -14,25 +14,18 @@ const I18N_DICT = {
     'nav.gallery': 'Album',
     'nav.gift': 'Mừng Cưới',
 
-    'hero.eyebrow': 'Save The Date',
     'hero.scrollAria': 'Cuộn xuống',
-
-    'cd.days': 'Ngày',
-    'cd.hours': 'Giờ',
-    'cd.minutes': 'Phút',
-    'cd.seconds': 'Giây',
 
     'inv.familyMan': 'Nhà Trai',
     'inv.familyWoman': 'Nhà Gái',
     'inv.announce': 'Trân trọng báo tin',
-    'inv.roles': 'Trưởng Nam  ·  Thứ Nữ',
+    'inv.roles': 'Trưởng Nam  ·  Thứ Nữ',
 
     'event.vuquy.date': 'Thứ Bảy, 30 tháng 05 năm 2026',
-    'event.vuquy.time': 'Đón khách 10:00  ·  Khai tiệc 11:00',
+    'event.vuquy.time': 'Đón khách 10:00  ·  Khai tiệc 11:00',
     'event.thanhhon.date': 'Thứ Bảy, 06 tháng 06 năm 2026',
-    'event.thanhhon.time': 'Đón khách 18:00  ·  Khai tiệc 19:00',
+    'event.thanhhon.time': 'Đón khách 18:00  ·  Khai tiệc 19:00',
     'event.mapLink': 'Xem trên Google Maps ↗',
-    'event.photoCaption': 'AMOR RESORT · Sảnh BELLA VITA · TP. Hồ Chí Minh',
     'event.photoAlt': 'Không gian tiệc cưới',
 
     'story.eye': 'Câu Chuyện Của Chúng Tôi',
@@ -83,25 +76,18 @@ const I18N_DICT = {
     'nav.gallery': 'Album',
     'nav.gift': 'Gifts',
 
-    'hero.eyebrow': 'Save The Date',
     'hero.scrollAria': 'Scroll down',
-
-    'cd.days': 'Days',
-    'cd.hours': 'Hours',
-    'cd.minutes': 'Minutes',
-    'cd.seconds': 'Seconds',
 
     'inv.familyMan': "Groom's Family",
     'inv.familyWoman': "Bride's Family",
     'inv.announce': 'Joyfully announce the wedding of',
-    'inv.roles': 'Eldest Son  ·  Second Daughter',
+    'inv.roles': 'Eldest Son  ·  Second Daughter',
 
     'event.vuquy.date': 'Saturday, May 30, 2026',
-    'event.vuquy.time': 'Reception 10:00  ·  Banquet 11:00',
+    'event.vuquy.time': 'Reception 10:00  ·  Banquet 11:00',
     'event.thanhhon.date': 'Saturday, June 6, 2026',
-    'event.thanhhon.time': 'Reception 18:00  ·  Banquet 19:00',
+    'event.thanhhon.time': 'Reception 18:00  ·  Banquet 19:00',
     'event.mapLink': 'View on Google Maps ↗',
-    'event.photoCaption': 'AMOR RESORT · BELLA VITA Hall · Ho Chi Minh City',
     'event.photoAlt': 'Wedding venue interior',
 
     'story.eye': 'Our Love Story',
@@ -215,58 +201,16 @@ function applyLanguage(lang) {
 })();
 
 
-/* ── Countdown Timer ── */
-(function initCountdown() {
-  const vuQuy   = new Date('2026-05-30T10:00:00+07:00');
-  const wedding = new Date('2026-06-06T15:00:00+07:00');
-
-  const els = {
-    daysBride:   document.getElementById('cd-days-bride'),
-    daysWedding: document.getElementById('cd-days-wedding'),
-    hours:       document.getElementById('cd-hours'),
-    minutes:     document.getElementById('cd-minutes'),
-    seconds:     document.getElementById('cd-seconds'),
-  };
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function tick() {
-    const now = Date.now();
-    const diffVuQuy   = vuQuy.getTime() - now;
-    const diffWedding = wedding.getTime() - now;
-
-    const dBride   = diffVuQuy   > 0 ? Math.floor(diffVuQuy   / 86400000) : 0;
-    const dWedding = diffWedding > 0 ? Math.floor(diffWedding / 86400000) : 0;
-
-    if (els.daysBride)   els.daysBride.textContent   = pad(dBride);
-    if (els.daysWedding) els.daysWedding.textContent = pad(dWedding);
-
-    // hours / minutes / seconds count toward the closer event
-    const diffActive = diffVuQuy > 0 ? diffVuQuy : diffWedding;
-    if (diffActive <= 0) {
-      if (els.hours)   els.hours.textContent   = '00';
-      if (els.minutes) els.minutes.textContent = '00';
-      if (els.seconds) els.seconds.textContent = '00';
-      return;
-    }
-
-    if (els.hours)   els.hours.textContent   = pad(Math.floor((diffActive % 86400000) / 3600000));
-    if (els.minutes) els.minutes.textContent = pad(Math.floor((diffActive % 3600000)  / 60000));
-    if (els.seconds) els.seconds.textContent = pad(Math.floor((diffActive % 60000)    / 1000));
-  }
-
-  tick();
-  setInterval(tick, 1000);
-})();
-
-
 /* ── Sticky Navigation ── */
 (function initNav() {
   const nav = document.getElementById('nav');
   if (!nav) return;
+  const langSwitch = document.querySelector('.lang-switch');
 
   const onScroll = () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
+    const scrolled = window.scrollY > 60;
+    nav.classList.toggle('scrolled', scrolled);
+    if (langSwitch) langSwitch.classList.toggle('scrolled', scrolled);
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -352,74 +296,46 @@ function applyLanguage(lang) {
   sections.forEach(s => obs.observe(s));
 })();
 
-/* ── Photo manifest (all 47 wedding photos in images/photos/) ── */
-const PHOTO_MANIFEST = [
-  { file: 'DSC03144.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC03147.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC03150.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC03174.webp', orient: 'landscape', ratio: 1.776 },
-  { file: 'DSC03181.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC03445.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC03449.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC03475.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC03488.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC03607.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC03875.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC03892.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC04084.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC04691.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC04789.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC04869.webp', orient: 'landscape', ratio: 1.499 },
-  { file: 'DSC05450.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05535.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05619.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05679.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05681.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05688.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05694.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05697.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05711.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05744.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05746.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05750.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05791.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05831.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05833.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05926.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05935.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05939.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC05951.webp', orient: 'portrait',  ratio: 0.563 },
-  { file: 'DSC05961.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06003.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06021.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06026.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06104.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06109.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06112.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06113.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06118.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06122.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06129.webp', orient: 'portrait',  ratio: 0.667 },
-  { file: 'DSC06156.webp', orient: 'portrait',  ratio: 0.667 },
-];
-
-/* ── Populate masonry gallery from manifest (natural aspect, no crop). ── */
-(function populateGallery() {
+/* ── Populate masonry gallery from manifest, then init lightbox ── */
+/* Manifest is auto-generated by scripts/compress-photos.sh — single source of truth. */
+(async function initGalleryAndLightbox() {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
-  PHOTO_MANIFEST.forEach((p, i) => {
+
+  let manifest;
+  try {
+    const res = await fetch('images/photos/manifest.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    manifest = await res.json();
+  } catch (err) {
+    console.error('Could not load photo manifest:', err);
+    return;
+  }
+
+  manifest.forEach((p, i) => {
     // Width/height attributes preserve aspect ratio during lazy-load (no layout jump).
-    // All photos are bounded to max edge 2000 by the compression script.
-    const w = p.orient === 'landscape' ? 2000 : Math.round(2000 * p.ratio);
-    const h = p.orient === 'landscape' ? Math.round(2000 / p.ratio) : 2000;
+    // Use the manifest's real pixel dims so DSC03449/DSC05688 (kept at 6000×4000) get
+    // the correct ratio instead of the 2000-px assumption used elsewhere.
+    const w = p.w;
+    const h = p.h;
     const item = document.createElement('div');
     item.className = 'gallery-item';
     item.innerHTML =
       `<img src="images/photos/${p.file}" alt="Wedding photo ${i + 1}" ` +
       `width="${w}" height="${h}" loading="lazy" />` +
       `<div class="gallery-overlay"></div>`;
+    // Fade the photo in once it decodes; if it's already cached, the load event has
+    // already fired, so flip the class immediately based on .complete.
+    const img = item.querySelector('img');
+    if (img.complete && img.naturalWidth > 0) {
+      img.classList.add('is-loaded');
+    } else {
+      img.addEventListener('load', () => img.classList.add('is-loaded'), { once: true });
+    }
     grid.appendChild(item);
   });
+
+  initLightbox();
 })();
 
 /* ── "Show more" toggle for the collapsed gallery preview ── */
@@ -451,8 +367,8 @@ const PHOTO_MANIFEST = [
   }, 5000);
 })();
 
-/* ── Gallery Lightbox ── */
-(function initLightbox() {
+/* ── Gallery Lightbox (called after the gallery is populated) ── */
+function initLightbox() {
   const lightbox = document.getElementById('lightbox');
   if (!lightbox) return;
 
@@ -563,7 +479,7 @@ const PHOTO_MANIFEST = [
     else if (e.key === 'ArrowLeft')  show(currentIdx - 1);
     else if (e.key === 'ArrowRight') show(currentIdx + 1);
   });
-})();
+}
 
 
 (function initGiftCopy() {
