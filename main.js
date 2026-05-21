@@ -320,7 +320,11 @@ function applyLanguage(lang) {
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  // threshold: 0 ensures we trigger as soon as any part of the target enters
+  // the viewport — critical for tall sections like the masonry gallery, where
+  // 12% of the section is taller than the viewport and the old threshold of
+  // 0.12 would never fire.
+  }, { threshold: 0, rootMargin: '0px 0px -80px 0px' });
 
   items.forEach(el => obs.observe(el));
 })();
@@ -395,18 +399,20 @@ const PHOTO_MANIFEST = [
   { file: 'DSC06156.webp', orient: 'portrait',  ratio: 0.667 },
 ];
 
-/* ── Populate gallery grid from manifest (orientation-aware variant). ── */
+/* ── Populate masonry gallery from manifest (natural aspect, no crop). ── */
 (function populateGallery() {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
   PHOTO_MANIFEST.forEach((p, i) => {
-    let variant = '';
-    if (p.orient === 'portrait')      variant = ' gallery-item--tall';
-    else if (p.ratio > 1.7)           variant = ' gallery-item--wide';
+    // Width/height attributes preserve aspect ratio during lazy-load (no layout jump).
+    // All photos are bounded to max edge 2000 by the compression script.
+    const w = p.orient === 'landscape' ? 2000 : Math.round(2000 * p.ratio);
+    const h = p.orient === 'landscape' ? Math.round(2000 / p.ratio) : 2000;
     const item = document.createElement('div');
-    item.className = 'gallery-item' + variant;
+    item.className = 'gallery-item';
     item.innerHTML =
-      `<img src="images/photos/${p.file}" alt="Wedding photo ${i + 1}" loading="lazy" />` +
+      `<img src="images/photos/${p.file}" alt="Wedding photo ${i + 1}" ` +
+      `width="${w}" height="${h}" loading="lazy" />` +
       `<div class="gallery-overlay"></div>`;
     grid.appendChild(item);
   });
